@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/fepu08/vanilla-js-go/handlers"
 	"github.com/fepu08/vanilla-js-go/logger"
 )
 
@@ -21,7 +22,10 @@ func initializeLogger() *logger.Logger {
 func main() {
 	logInstance := initializeLogger()
 
+	movieHandler := handlers.NewMovieHandler()
+
 	http.Handle("/", http.FileServer(http.Dir("public")))
+	http.Handle("/api/movies/top", movieHandler.GetTopMovies)
 
 	const addr = ":8080"
 	err := http.ListenAndServe(addr, nil)
