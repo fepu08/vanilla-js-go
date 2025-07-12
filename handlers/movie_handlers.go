@@ -11,8 +11,8 @@ type MovieHandler struct {
 	// TODO
 }
 
-func NewMovieHandler() MovieHandler {
-	return NewMovieHandler()
+func NewMovieHandler() *MovieHandler {
+	return &MovieHandler{}
 }
 
 func (movieHandler *MovieHandler) GetTopMovies(w http.ResponseWriter, r *http.Request) {
