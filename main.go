@@ -26,6 +26,7 @@ func main() {
 
 	http.Handle("/", http.FileServer(http.Dir("public")))
 	http.HandleFunc("/api/movies/top", movieHandler.GetTopMovies)
+	http.HandleFunc("/api/movies/random", movieHandler.GetRandomMovies)
 
 	const addr = ":8080"
 	err := http.ListenAndServe(addr, nil)
