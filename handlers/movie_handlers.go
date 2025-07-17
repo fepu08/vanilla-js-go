@@ -4,15 +4,31 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/fepu08/vanilla-js-go/data"
+	"github.com/fepu08/vanilla-js-go/logger"
 	"github.com/fepu08/vanilla-js-go/models"
 )
 
 type MovieHandler struct {
-	// TODO
+	storage data.MovieStorage
+	logger  *logger.Logger
 }
 
-func NewMovieHandler() *MovieHandler {
-	return &MovieHandler{}
+func NewMovieHandler(movieRepo data.MovieStorage, logInstance *logger.Logger) *MovieHandler {
+	return &MovieHandler{storage: movieRepo, logger: logInstance}
+}
+
+func (h *MovieHandler) handleStorageError(w http.ResponseWriter, err error, context string) bool {
+	if err != nil {
+		if err == data.ErrMovieNotFound {
+			http.Error(w, context, http.StatusNotFound)
+			return true
+		}
+		h.logger.Error(context, err)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return true
+	}
+	return false
 }
 
 func (movieHandler *MovieHandler) writeJSONResponse(w http.ResponseWriter, data interface{}) {

@@ -2,3 +2,5 @@ movie-service.log
 notes.md
 tmp
 database
+
+.env
