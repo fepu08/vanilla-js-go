@@ -21,12 +21,12 @@ func initializeLogger() *logger.Logger {
 		panic(err)
 	}
 
-	defer logger.Close()
 	return logger
 }
 
 func main() {
 	logInstance := initializeLogger()
+	defer logInstance.Close()
 
 	// Load .env file
 	if err := godotenv.Load(); err != nil {
@@ -50,8 +50,10 @@ func main() {
 		log.Fatalf("Failed to initialize movierepository")
 	}
 
+	// Handlers
 	movieHandler := handlers.NewMovieHandler(movieRepo, logInstance)
 
+	// Endpoints
 	http.HandleFunc("/api/movies/top", movieHandler.GetTopMovies)
 	http.HandleFunc("/api/movies/random", movieHandler.GetRandomMovies)
 
