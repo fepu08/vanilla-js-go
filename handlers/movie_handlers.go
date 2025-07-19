@@ -6,7 +6,6 @@ import (
 
 	"github.com/fepu08/vanilla-js-go/data"
 	"github.com/fepu08/vanilla-js-go/logger"
-	"github.com/fepu08/vanilla-js-go/models"
 )
 
 type MovieHandler struct {
@@ -51,26 +50,11 @@ func (movieHandler *MovieHandler) GetTopMovies(w http.ResponseWriter, r *http.Re
 }
 
 func (movieHandler *MovieHandler) GetRandomMovies(w http.ResponseWriter, r *http.Request) {
-	movies := []models.Movie{
-		{
-			ID:          3,
-			TMDB_ID:     181,
-			Title:       "Die Hard",
-			ReleaseYear: 1995,
-			Genres:      []models.Genre{{ID: 1, Name: "Action"}},
-			Keywords:    []string{},
-			Casting:     []models.Actor{{ID: 1, FirstName: "Max", LastName: "Wick"}},
-		},
-		{
-			ID:          4,
-			TMDB_ID:     181,
-			Title:       "Mad Max",
-			ReleaseYear: 2004,
-			Genres:      []models.Genre{{ID: 1, Name: "Action"}},
-			Keywords:    []string{},
-			Casting:     []models.Actor{{ID: 1, FirstName: "Jon", LastName: "Doe"}},
-		},
+	movies, err := movieHandler.storage.GetRandomMovies()
+	if err != nil {
+		http.Error(w, "internal server error", http.StatusInternalServerError)
+		movieHandler.logger.Error("Get Random Movies Error", err)
+		return
 	}
-
 	movieHandler.writeJSONResponse(w, movies)
 }
