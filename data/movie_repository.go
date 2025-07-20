@@ -25,6 +25,7 @@ func NewMovieRepository(db *sql.DB, log *logger.Logger) (*MovieRepository, error
 const defaultLimit = 20
 
 func (r *MovieRepository) GetTopMovies() ([]models.Movie, error) {
+	// Fetch movies
 	query := `
 		SELECT id, tmdb_id, title, tagline, release_year, overview, score, 
 		       popularity, language, poster_url, trailer_url
@@ -36,6 +37,7 @@ func (r *MovieRepository) GetTopMovies() ([]models.Movie, error) {
 }
 
 func (r *MovieRepository) GetRandomMovies() ([]models.Movie, error) {
+	// Fetch movies
 	randomQuery := `
 		SELECT id, tmdb_id, title, tagline, release_year, overview, score, 
 		       popularity, language, poster_url, trailer_url
@@ -58,7 +60,7 @@ func (r *MovieRepository) getMovies(query string) ([]models.Movie, error) {
 	for rows.Next() {
 		var m models.Movie
 		if err := rows.Scan(
-			&m.ID, &m.TMDB_ID, &m.Title, &m.TagLine, &m.ReleaseYear,
+			&m.ID, &m.TMDB_ID, &m.Title, &m.Tagline, &m.ReleaseYear,
 			&m.Overview, &m.Score, &m.Popularity, &m.Language,
 			&m.PosterURL, &m.TrailerURL,
 		); err != nil {
@@ -83,7 +85,7 @@ func (r *MovieRepository) GetMovieByID(id int) (models.Movie, error) {
 
 	var m models.Movie
 	err := row.Scan(
-		&m.ID, &m.TMDB_ID, &m.Title, &m.TagLine, &m.ReleaseYear,
+		&m.ID, &m.TMDB_ID, &m.Title, &m.Tagline, &m.ReleaseYear,
 		&m.Overview, &m.Score, &m.Popularity, &m.Language,
 		&m.PosterURL, &m.TrailerURL,
 	)
@@ -142,7 +144,7 @@ func (r *MovieRepository) SearchMoviesByName(name string, order string, genre *i
 	for rows.Next() {
 		var m models.Movie
 		if err := rows.Scan(
-			&m.ID, &m.TMDB_ID, &m.Title, &m.TagLine, &m.ReleaseYear,
+			&m.ID, &m.TMDB_ID, &m.Title, &m.Tagline, &m.ReleaseYear,
 			&m.Overview, &m.Score, &m.Popularity, &m.Language,
 			&m.PosterURL, &m.TrailerURL,
 		); err != nil {
