@@ -3,9 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello from Go</title>
+    <title>ReelingIt - Movies</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="app.webmanifest" />
+    <link rel="icon" href="images/icon.png" />
   </head>
   <body>
-    <h1>Hello World</h1>
+    <header>
+      <h1><img src="images/logo.png" height="35" alt="ReelingIt" /></h1>
+      <nav>
+        <ul>
+          <li><a class="navlink" href="/">Movies</a></li>
+          <li><a class="navlink" href="/account/favorites">Favorites</a></li>
+          <li><a class="navlink" href="/account/watchlist">Watch List</a></li>
+          <li><a class="navlink" href="/account">My Account</a></li>
+        </ul>
+      </nav>
+      <div>
+        <form onsubmit="app.search(event)">
+          <input type="search" name="" id="" placeholder="Search" />
+        </form>
+      </div>
+    </header>
+
+    <main></main>
+
+    <footer>
+      <p>(C) ReelingIt - FrontendMasters.com</p>
+    </footer>
   </body>
 </html>
