@@ -1,3 +1,5 @@
+import { API } from './services/API.js';
+
 window.app = {
   search: (event) => {
     event.preventDefault();
@@ -7,4 +9,5 @@ window.app = {
     // TODO
     console.log('Keywords', keywords);
   },
+  api: API,
 };
