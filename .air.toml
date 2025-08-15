@@ -12,7 +12,7 @@ cmd = "go build -o ./tmp/main.exe ./main.go"
 bin = "./tmp/main.exe"
 
 include_ext = ["go"]  # Only watch .go files
-exclude_dir = ["tmp", "vendor", "node_modules"]
+exclude_dir = ["tmp", "vendor", "node_modules", "database"]
 delay = 1000  # ms
 
 [log]
@@ -20,6 +20,3 @@ time = true
 
 [misc]
 clean_on_exit = true
-# .air.toml
-root = "."
-tmp
