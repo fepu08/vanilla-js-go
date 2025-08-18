@@ -5,6 +5,14 @@ export const Router = {
     window.addEventListener('popstate', () => {
       Router.go(location.pathname, false);
     });
+    document.querySelectorAll('a.navlink').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const href = a.getAttribute('href');
+        Router.go(href);
+      });
+    });
 
     Router.go(location.pathname + location.search);
   },
@@ -34,9 +42,8 @@ export const Router = {
     if (pageElement == null) {
       pageElement = document.createElement('h1');
       pageElement.textContent = 'Page not found';
-    } else {
-      document.querySelector('main').innerHTML = '';
-      document.querySelector('main').appendChild(pageElement);
     }
+    document.querySelector('main').innerHTML = '';
+    document.querySelector('main').appendChild(pageElement);
   },
 };
