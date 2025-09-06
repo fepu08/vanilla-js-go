@@ -1,5 +1,8 @@
 export const API = {
   baseURL: '/api',
+  getGenres: async () => {
+    return await API.fetch('/genres');
+  },
   getTopMovies: async () => {
     return await API.fetch('/movies/top');
   },
