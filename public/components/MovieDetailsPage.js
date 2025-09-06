@@ -1,5 +1,5 @@
 import { API } from '../services/API.js';
-import { MovieItem } from './MovieItem.js';
+import MovieItem from './MovieItem.js';
 
 export class MovieDetailsPage extends HTMLElement {
   id = null;

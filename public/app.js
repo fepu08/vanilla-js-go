@@ -10,13 +10,32 @@ window.addEventListener('DOMContentLoaded', (event) => {
 });
 
 window.app = {
+  showError: (message = 'There was an error.', goToHome = true) => {
+    document.getElementById('alert-modal').showModal();
+    document.querySelector('#alert-modal p').textContent = message;
+    if (goToHome) app.Router.go('/');
+  },
+  closeError: () => {
+    document.getElementById('alert-modal').close();
+  },
   search: (event) => {
     event.preventDefault();
-
-    const keywords = document.querySelector('input[type=search]').value;
-
-    // TODO
-    console.log('Keywords', keywords);
+    const q = document.querySelector('input[type=search]').value;
+    if (q) {
+      app.Router.go('/movies?q=' + q);
+    }
+  },
+  searchOrderChange: (order) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const q = urlParams.get('q');
+    const genre = urlParams.get('genre') ?? '';
+    app.Router.go(`/movies?q=${q}&order=${order}&genre=${genre}`);
+  },
+  searchFilterChange: (genre) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const q = urlParams.get('q');
+    const order = urlParams.get('order') ?? '';
+    app.Router.go(`/movies?q=${q}&order=${order}&genre=${genre}`);
   },
   api: API,
   Router,

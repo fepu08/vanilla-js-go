@@ -1,5 +1,8 @@
 export const API = {
   baseURL: '/api',
+  getGenres: async () => {
+    return await API.fetch('/genres');
+  },
   getTopMovies: async () => {
     return await API.fetch('/movies/top');
   },
@@ -10,7 +13,7 @@ export const API = {
     return await API.fetch(`/movies/${id}`);
   },
   searchMovies: async (q, order, genre) => {
-    return await API.fetch(`/movies/search/`, { q, order, genre });
+    return await API.fetch(`/movies/search`, { q, order, genre });
   },
   fetch: async (serviceName, args) => {
     try {
