@@ -10,6 +10,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
 });
 
 window.app = {
+  showError: (message = 'There was an error.', goToHome = true) => {
+    document.getElementById('alert-modal').showModal();
+    document.querySelector('#alert-modal p').textContent = message;
+    if (goToHome) app.Router.go('/');
+  },
+  closeError: () => {
+    document.getElementById('alert-modal').close();
+  },
   search: (event) => {
     event.preventDefault();
     const q = document.querySelector('input[type=search]').value;
