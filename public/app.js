@@ -12,11 +12,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 window.app = {
   search: (event) => {
     event.preventDefault();
-
-    const keywords = document.querySelector('input[type=search]').value;
-
-    // TODO
-    console.log('Keywords', keywords);
+    const q = document.querySelector('input[type=search]').value;
+    app.Router.go('/movies?q=' + q);
   },
   api: API,
   Router,

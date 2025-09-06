@@ -1,6 +1,6 @@
 import { API } from '../services/API.js';
 
-export class MovieItem extends HTMLElement {
+export default class MovieItem extends HTMLElement {
   constructor(movie) {
     super();
     this.movie = movie;
